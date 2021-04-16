@@ -1,0 +1,26 @@
+aws-list-all
+
+# print(
+        #       "Id: {0}\nPlatform: {1}\nType: {2}\nPublic IPv4: {3}\nAMI: {4}\nState: {5}\nTags: {6}\n".format(
+        #       instance.id, instance.platform, instance.instance_type, instance.public_ip_address, instance.image.id, instance.state, instance.tags
+        #      )
+        #  )
+
+         json.dump("Id: {0}\nPlatform: {1}\nType: {2}\nPublic IPv4: {3}\nAMI: {4}\nState: {5}\nTags: {6}\n".format(
+                instance.id, instance.platform, instance.instance_type, instance.public_ip_address, instance.image.id, instance.state, instance.tags), json_file)
+
+
+                if variable.lambda_function :
+   with open("data_lambda.json","w") as json_file:
+         json.dump(lambda_client.list_functions(), json_file)
+
+
+         ec2
+         ecs
+         ebs
+         lb
+         eks
+         lambda
+         dynamo
+         rds
+         
