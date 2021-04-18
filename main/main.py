@@ -3,24 +3,26 @@
 
 import json
 import boto3
-import variable
+import Variable_Service
 import ec2_Monitor
-monitor = boto3.resource('cloudwatch')
-cloudwatch = boto3.client('cloudwatch')
+import Variable_Function
 ec2 = boto3.resource('ec2')
 
 instance_list = []
-cloudwatch_monitor_list = []
 
-if variable.ec2 :
+if Variable_Service.ec2 :
     for instance in ec2.instances.all():  
         instance_list.append(instance.id)            
         
-    for alarm_iterator in monitor.alarms.all():
-        cloudwatch_monitor_list.append(alarm_iterator.name)
+if Variable_Function.Create_CPU_Monitor :
+    ec2_Monitor.Create_CPU_Monitor(instance_list)
 
-    ec2_monitor.create_CPU_monitor(instance_list)
-    ec2_monitor.create_DiskReadOps_monitor(instance_list)
-    ec2_monitor.create_DiskWriteOps_monitor(instance_list)
-    ec2_monitor.create_CPUCreditUsage_monitor(instance_list)
+if Variable_Function.Ceate_DiskReadOps_Monitor :
+    ec2_Monitor.Ceate_DiskReadOps_Monitor(instance_list)
+
+if Variable_Function.Create_DiskWriteOps_Monitor :
+    ec2_Monitor.Create_DiskWriteOps_Monitor(instance_list)
+
+if Variable_Function.Create_CPUCreditUsage_Monitor : 
+    ec2_Monitor.Create_CPUCreditUsage_Monitor(instance_list)
 

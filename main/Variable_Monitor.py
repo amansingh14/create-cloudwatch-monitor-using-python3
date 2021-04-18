@@ -4,6 +4,8 @@
 # Refer https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html for documentation.
 # Use this variable file to set variables for monitors
                                                 #Possible Values
+AlarmNamePrefix     = 'Lambda: Error Count is HIGH on function:'
+MonitorName         =   ''
 ActionsEnabled      =  'False'                  # True|False                               
 Namespace           =  'AWS/EC2'                # AWS/EC2,
 Period              =  '300'                    # in seconds
