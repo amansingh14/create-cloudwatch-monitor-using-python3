@@ -2,6 +2,7 @@
 # Org : nClouds Inc.
 
 import boto3
+#import Variable_Monitor
 monitor = boto3.resource('cloudwatch')
 cloudwatch = boto3.client('cloudwatch')
 import re
@@ -9,8 +10,7 @@ import re
 Cloudwatch_Monitor_List = []
 
 
-
-# Create CPU Utilization for EC2 instance metric alert.
+# CPU Utilization
 
 def Create_CPU_Monitor(instance_list):
     for alarm_iterator in monitor.alarms.all():
@@ -53,19 +53,20 @@ def Create_CPU_Monitor(instance_list):
                 )
             print("CPU monitor Created successfully for EC2 instance:", instance_id)
 
-# # Create DISK READOPS for EC2 Instance metric alert. 
+# # DiskReadOps 
 
 def Ceate_DiskReadOps_Monitor(instance_list):
-     for alarm_iterator in monitor.alarms.all():
+    for alarm_iterator in monitor.alarms.all():
         Cloudwatch_Monitor_List.append(alarm_iterator.name)
 
     Monitor_List = str(Cloudwatch_Monitor_List)
+    
     for instance_id in instance_list: 
         if list(set(re.findall(r'DiskReadIOPS is high on*(?: *([\w.-]+))?', Monitor_List.lower()))):
             print('DiskReadOps monitor Found for:', instance_id)
             
         else:  
-        cloudwatch.put_metric_alarm(
+            cloudwatch.put_metric_alarm(
             AlarmName='EC2 : DiskReadIOPS is HIGH on %s' % instance_id,
             ComparisonOperator='GreaterThanOrEqualToThreshold',
             EvaluationPeriods=1,
@@ -97,7 +98,7 @@ def Ceate_DiskReadOps_Monitor(instance_list):
         print("DisReadOps Monitor Created successfully for instance: ", instance_id)
 
 
-# #
+# DiskWriteOps
 def Create_DiskWriteOps_Monitor(instance_list):
     for instance_id in instance_list:
         cloudwatch.put_metric_alarm(

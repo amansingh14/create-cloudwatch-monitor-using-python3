@@ -13,7 +13,7 @@ Statistic           =  'Average'                # 'SampleCount'|'Average'|'Sum'|
 Unit                =  'Seconds'                # 'Seconds'|'Microseconds'|'Milliseconds'|'Bytes'|'Kilobytes'|'Megabytes'|'Gigabytes'|'Terabytes'|'Bits'|'Kilobits'|'Megabits'|'Gigabits'|'Terabits'|'Percent'|'Count'|'Bytes/Second'|'Kilobytes/Second'|'Megabytes/Second'|'Gigabytes/Second'|'Terabytes/Second'|'Bits/Second'|'Kilobits/Second'|'Megabits/Second'|'Gigabits/Second'|'Terabits/Second'|'Count/Second'|'None',
 EvaluationPeriods   
 DatapointsToAlarm   = '1'                           
-Threshold           =  
+Threshold           =  '80'
 ComparisonOperator
 TreatMissingData
 StateValue                                      # 'OK'|'ALARM'|'INSUFFICIENT_DATA',
