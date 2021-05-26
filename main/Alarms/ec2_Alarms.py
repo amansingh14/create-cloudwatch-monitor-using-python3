@@ -1,6 +1,4 @@
-# Author : Aman Singh
-# Org : nClouds Inc.
-
+ 
 import boto3
 #import Variable_Monitor
 monitor = boto3.resource('cloudwatch')

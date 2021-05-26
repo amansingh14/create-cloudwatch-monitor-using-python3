@@ -1,3 +1,12 @@
+
+## This file has following functions:
+# 1. Create_ELB_Latency(dict elb_list)
+# 2. Create_ELB_RequestCount(dict elb_list)
+# 3. Create_ELB_UnHealthyHostCount(dict elb_list)
+# 4. Create_ELB_HTTPCode_ELB_5XX(dict elb_list)
+
+####
+
 import boto3
 #import Variable_Monitor
 monitor = boto3.resource('cloudwatch')
@@ -20,7 +29,7 @@ def Create_ELB_Latency(elb_list):
         else:
             cloudwatch.put_metric_alarm(
                 AlarmName='ELB Latency is High on %s' % elb,
-                ComparisonOperator='GreaterThanThreshold',
+                ComparisonOperator='GreaterThanOrEqualToThreshold',
                 EvaluationPeriods=1,
                 MetricName='Latency',
                 Namespace='AWS/ELB',
@@ -64,7 +73,7 @@ def Create_ELB_RequestCount(elb_list):
         else:
             cloudwatch.put_metric_alarm(
                 AlarmName='RequestCount is High on %s' % elb,
-                ComparisonOperator='GreaterThanThreshold',
+                ComparisonOperator='GreaterThanOrEqualToThreshold',
                 EvaluationPeriods=1,
                 MetricName='RequestCount',
                 Namespace='AWS/ELB',
@@ -107,7 +116,7 @@ def Create_ELB_UnHealthyHostCount(elb_list):
         else:
             cloudwatch.put_metric_alarm(
                 AlarmName='UnHealthyHostCount is High on %s' % elb,
-                ComparisonOperator='GreaterThanThreshold',
+                ComparisonOperator='GreaterThanOrEqualToThreshold',
                 EvaluationPeriods=1,
                 MetricName='UnHealthyHostCount',
                 Namespace='AWS/ELB',
@@ -150,7 +159,7 @@ def Create_ELB_HTTPCode_ELB_5XX(elb_list):
         else:
             cloudwatch.put_metric_alarm(
                 AlarmName='5XX error count is High on %s' % elb,
-                ComparisonOperator='GreaterThanThreshold',
+                ComparisonOperator='GreaterThanOrEqualToThreshold',
                 EvaluationPeriods=1,
                 MetricName='HTTPCode_ELB_5XX',
                 Namespace='AWS/ELB',
