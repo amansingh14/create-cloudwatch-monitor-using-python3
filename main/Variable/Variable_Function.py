@@ -1,6 +1,3 @@
-# Author : Aman Singh
-# Org : nClouds Inc.
-
 
 # This File to help you setting parameters for the monitor function you want to create.
 #
@@ -23,7 +20,19 @@ ec2_CPUCreditUsage_Monitor           =   False
 #                                                  #
 ####################################################
 
-ELB_Latency                         =  True
-ELB_RequestCount                    =  True
-ELB_UnHealthyHostCount              =  True
-ELB_HTTPCode_ELB_5XX                =  False
+ELB_Latency                          =  False
+ELB_RequestCount                     =  False
+ELB_UnHealthyHostCount               =  False
+ELB_HTTPCode_ELB_5XX                 =  False
+
+####################################################
+#                                                  #
+#   Set Function variable for Lambda Monitors      # 
+#                                                  #
+####################################################
+Lambda_Error                            = False
+Lambda_Throttles                        = False
+Lambda_Invocations                      = False
+Lambda_ConcurrentExecutions             = False
+Lambda_Duration                         = False
+Lambda_UnreservedConcurrentExecutions   = False

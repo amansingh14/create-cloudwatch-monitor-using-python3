@@ -1,8 +1,8 @@
 
-# define variable to get from aws services
+# Define variable to get from aws services
 ###############################################
-#             AWS Service List                #          
-# Mark true for services need to used in code #
+#             AWS SERVICE LIST                #          
+#    Mark Service TRUE for creating Alarms    #
 ###############################################
                                 
 dynamodb                    = False                                 
@@ -15,7 +15,7 @@ efs                         = False
 eks                         = False                                                                
 elasticache                 = False                                 
 elastictranscoder           = False                                 
-elb                         = True                                 
+elb                         = False                                 
 elbv2                       = False                                                                 
-lambda_function             = False                            
+lambda_function             = True                            
 
