@@ -15,7 +15,7 @@ efs                         = False
 eks                         = False                                                                
 elasticache                 = False                                 
 elastictranscoder           = False                                 
-elb                         = False                                 
+elb                         = True                                 
 elbv2                       = False                                                                 
-lambda_function             = True                            
+lambda_function             = False                            
 

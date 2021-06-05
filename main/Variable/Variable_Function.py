@@ -20,7 +20,7 @@ ec2_CPUCreditUsage_Monitor           =   False
 #                                                  #
 ####################################################
 
-ELB_Latency                          =  False
+ELB_Latency                          =  True
 ELB_RequestCount                     =  False
 ELB_UnHealthyHostCount               =  False
 ELB_HTTPCode_ELB_5XX                 =  False

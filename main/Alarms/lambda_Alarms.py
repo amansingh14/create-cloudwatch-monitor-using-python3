@@ -102,22 +102,167 @@ def Create_LBD_Throttles(lambda_function_list):
                 ],
                 
                 )
-            print("Throttle Alarm Successfully created for :", elb)
+            print("Throttle Alarm Successfully created for :", lbd)
     print("==========================================")
 
 # function to create Invocations alarm
 def Create_LBD_Invocations(lambda_function_list):
-    
+    for alarm_iterator in monitor.alarms.all():
+        Cloudwatch_Monitor_List.append(alarm_iterator.name)
+
+    Monitor_List = str(Cloudwatch_Monitor_List)
+    for lbd in lambda_function_list: 
+        if list(set(re.findall(r'Invocation is high on*(?: *([\w.-]+))?', Monitor_List.lower()))):
+            print('Invocation Alarm is Present for :', lbd)
+            
+        else:
+            cloudwatch.put_metric_alarm(
+                AlarmName='Invocation is High on %s' % lbd,
+                ComparisonOperator='GreaterThanOrEqualToThreshold',
+                EvaluationPeriods=1,
+                MetricName='Invocations',
+                Namespace='AWS/Lambda',
+                Period=60,
+                Statistic='Average',
+                Threshold=1.0,
+                ActionsEnabled=False,
+                AlarmDescription='Alarm when Invocations is greater than equal to 5',
+                Dimensions=[
+                {
+                    'Name': 'Lambda_Name',
+                    'Value': lbd
+                },
+                ],
+                Tags=[
+                {
+                    'Key': 'type',
+                    'Value': 'Invocations'
+                },
+                {
+                    'Key': 'Name',
+                    'Value': lbd
+                }           
+                ],
+                
+                )
+            print("Invocations Alarm Successfully created for :", lbd)
+    print("==========================================")
 
 # Function to create Duration alarm
 def Create_LBD_Duration(lambda_function_list):
-    
+    for lbd in lambda_function_list: 
+        if list(set(re.findall(r'Duration is high on*(?: *([\w.-]+))?', Monitor_List.lower()))):
+            print('Invocation Alarm is Present for :', lbd)
+            
+        else:
+            cloudwatch.put_metric_alarm(
+                AlarmName='Duration is High on %s' % lbd,
+                ComparisonOperator='GreaterThanOrEqualToThreshold',
+                EvaluationPeriods=1,
+                MetricName='Invocations',
+                Namespace='AWS/Lambda',
+                Period=60,
+                Statistic='Average',
+                Threshold=5.0,
+                ActionsEnabled=False,
+                AlarmDescription='Alarm when Duration is greater than equal to 5',
+                Dimensions=[
+                {
+                    'Name': 'Lambda_Name',
+                    'Value': lbd
+                },
+                ],
+                Tags=[
+                {
+                    'Key': 'type',
+                    'Value': 'Duration'
+                },
+                {
+                    'Key': 'Name',
+                    'Value': lbd
+                }           
+                ],
+                
+                )
+            print("Invocations Alarm Successfully created for :", lbd)
+    print("==========================================")
 # Function to create ConcurrentExecutions alarm
 
 def Create_LBD_ConcurrentExecutions(lambda_function_list) :
-
+    for lbd in lambda_function_list: 
+        if list(set(re.findall(r'ConcurrentExecutions is high on*(?: *([\w.-]+))?', Monitor_List.lower()))):
+            print('ConcurrentExecutions Alarm is Present for :', lbd)
+            
+        else:
+            cloudwatch.put_metric_alarm(
+                AlarmName='Duration is High on %s' % lbd,
+                ComparisonOperator='GreaterThanOrEqualToThreshold',
+                EvaluationPeriods=1,
+                MetricName='ConcurrentExecutions',
+                Namespace='AWS/Lambda',
+                Period=60,
+                Statistic='Average',
+                Threshold=5.0,
+                ActionsEnabled=False,
+                AlarmDescription='Alarm when Duration is greater than equal to 5',
+                Dimensions=[
+                {
+                    'Name': 'Lambda_Name',
+                    'Value': lbd
+                },
+                ],
+                Tags=[
+                {
+                    'Key': 'type',
+                    'Value': 'ConcurrentExecutions'
+                },
+                {
+                    'Key': 'Name',
+                    'Value': lbd
+                }           
+                ],
+                
+                )
+            print("ConcurrentExecutions Alarm Successfully created for :", lbd)
+    print("==========================================")
 # Function to create UnreservedConcurrentExecutions alarm
    
 def Create_LBD_UnreservedConcurrentExecutions(lambda_function_list):
+    for lbd in lambda_function_list: 
+        if list(set(re.findall(r'UnreservedConcurrentExecutions is high on*(?: *([\w.-]+))?', Monitor_List.lower()))):
+            print('ConcurrentExecutions Alarm is Present for :', lbd)
+            
+        else:
+            cloudwatch.put_metric_alarm(
+                AlarmName='Duration is High on %s' % lbd,
+                ComparisonOperator='GreaterThanOrEqualToThreshold',
+                EvaluationPeriods=1,
+                MetricName='UnreservedConcurrentExecutions',
+                Namespace='AWS/Lambda',
+                Period=60,
+                Statistic='Average',
+                Threshold=5.0,
+                ActionsEnabled=False,
+                AlarmDescription='Alarm when UnreservedConcurrentExecutions is greater than equal to 5',
+                Dimensions=[
+                {
+                    'Name': 'Lambda_Name',
+                    'Value': lbd
+                },
+                ],
+                Tags=[
+                {
+                    'Key': 'type',
+                    'Value': 'UnreservedConcurrentExecutions'
+                },
+                {
+                    'Key': 'Name',
+                    'Value': lbd
+                }           
+                ],
+                
+                )
+            print("UnreservedConcurrentExecutions Alarm Successfully created for :", lbd)
+    print("==========================================")
 
    
