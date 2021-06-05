@@ -8,10 +8,15 @@
 ####
 
 import boto3
-#import Variable_Monitor
-monitor = boto3.resource('cloudwatch')
-cloudwatch = boto3.client('cloudwatch')
+from Variable import Variable_Monitor
 import re
+monitor                    = boto3.resource('cloudwatch')
+cloudwatch                 = boto3.client('cloudwatch')
+Var_ELB_Latency            = Variable_Monitor.ELB_Latency_Variable
+Var_ELB_RequestCount       = Variable_Monitor.ELB_RequestCount_Variable
+Var_ELB_UnhealthyhostCount = Variable_Monitor.ELB_UnhealthyhostCount_Variable
+Var_ELB_5XX                = Variable_Monitor.ELB_5XX_Variable
+
 
 Cloudwatch_Monitor_List = []
 
@@ -28,33 +33,38 @@ def Create_ELB_Latency(elb_list):
             
         else:
             cloudwatch.put_metric_alarm(
-                AlarmName='ELB Latency is High on %s' % elb,
-                ComparisonOperator='GreaterThanOrEqualToThreshold',
-                EvaluationPeriods=1,
-                MetricName='Latency',
-                Namespace='AWS/ELB',
-                Period=60,
-                Statistic='Average',
-                Threshold=40.0,
-                ActionsEnabled=False,
-                AlarmDescription='Alarm when ELB latency Spike over 40',
+                AlarmName           = Var_ELB_Latency.AlarmName + '%s' % elb,
+                AlarmDescription    = Var_ELB_Latency.AlarmDescription,
+                ComparisonOperator  = Var_ELB_Latency.ComparisonOperator,
+                EvaluationPeriods   = Var_ELB_Latency.EvaluationPeriods,
+                MetricName          = Var_ELB_Latency.MetricName,
+                Namespace           = Var_ELB_Latency.Namespace,
+                Period              = Var_ELB_Latency.Period,
+                Statistic           = Var_ELB_Latency.Statistic,
+                Threshold           = Var_ELB_Latency.Threshold,
+                Unit                = Var_ELB_Latency.Unit,
+                TreatMissingData    = Var_ELB_Latency.TreatMissingData,
+                ActionsEnabled      = Var_ELB_Latency.ActionsEnabled,
+                OKActions = [
+                    Var_ELB_Latency.OKActions,
+                ],
+                AlarmActions = [
+                    Var_ELB_Latency.AlarmActions,
+                ],
                 Dimensions=[
                 {
-                    'Name': 'ELB_Name',
+                    'Name': Var_ELB_Latency.Dimensions_Name,
                     'Value': elb
                 },
                 ],
                 Tags=[
                 {
-                    'Key': 'type',
-                    'Value': 'Latency'
+                    'Key': Var_ELB_Latency.Tags_Key,
+                    'Value': Var_ELB_Latency.Tags_Value
                 },
-                {
-                    'Key': 'Name',
-                    'Value': elb
-                }           
-                ],
-                Unit='Seconds'
+                          
+                ]
+                
                 )
             print("Latency Monitor Successfully created for :", elb)
     print("==========================================")
@@ -72,33 +82,38 @@ def Create_ELB_RequestCount(elb_list):
             
         else:
             cloudwatch.put_metric_alarm(
-                AlarmName='RequestCount is High on %s' % elb,
-                ComparisonOperator='GreaterThanOrEqualToThreshold',
-                EvaluationPeriods=1,
-                MetricName='RequestCount',
-                Namespace='AWS/ELB',
-                Period=60,
-                Statistic='Average',
-                Threshold=40.0,
-                ActionsEnabled=False,
-                AlarmDescription='Alarm when RequestCount Spike over 40',
+                AlarmName           = Var_ELB_RequestCount.AlarmName + '%s' % elb,
+                AlarmDescription    = Var_ELB_RequestCount.AlarmDescription,
+                ComparisonOperator  = Var_ELB_RequestCount.ComparisonOperator,
+                EvaluationPeriods   = Var_ELB_RequestCount.EvaluationPeriods,
+                MetricName          = Var_ELB_RequestCount.MetricName,
+                Namespace           = Var_ELB_RequestCount.Namespace,
+                Period              = Var_ELB_RequestCount.Period,
+                Statistic           = Var_ELB_RequestCount.Statistic,
+                Threshold           = Var_ELB_RequestCount.Threshold,
+                Unit                = Var_ELB_RequestCount.Unit,
+                TreatMissingData    = Var_ELB_RequestCount.TreatMissingData,
+                ActionsEnabled      = Var_ELB_RequestCount.ActionsEnabled,
+                OKActions = [
+                    Var_ELB_RequestCount.OKActions,
+                ],
+                AlarmActions = [
+                    Var_ELB_RequestCount.AlarmActions,
+                ],
                 Dimensions=[
                 {
-                    'Name': 'ELB_Name',
+                    'Name': Var_ELB_RequestCount.Dimensions_Name,
                     'Value': elb
                 },
                 ],
                 Tags=[
                 {
-                    'Key': 'type',
-                    'Value': 'RequestCount'
+                    'Key': Var_ELB_RequestCount.Tags_Key,
+                    'Value': Var_ELB_RequestCount.Tags_Value
                 },
-                {
-                    'Key': 'Name',
-                    'Value': elb
-                }           
-                ],
-                Unit='Seconds'
+                          
+                ]
+                
                 )
             print("RequestCount Monitor Successfully created for :", elb)
     print("==========================================")
@@ -115,33 +130,38 @@ def Create_ELB_UnHealthyHostCount(elb_list):
             
         else:
             cloudwatch.put_metric_alarm(
-                AlarmName='UnHealthyHostCount is High on %s' % elb,
-                ComparisonOperator='GreaterThanOrEqualToThreshold',
-                EvaluationPeriods=1,
-                MetricName='UnHealthyHostCount',
-                Namespace='AWS/ELB',
-                Period=60,
-                Statistic='Average',
-                Threshold=1,
-                ActionsEnabled=False,
-                AlarmDescription='Alarm when UnHealthyHostCount Spike over 1',
+                AlarmName           = Var_ELB_UnhealthyhostCount.AlarmName + '%s' % elb,
+                AlarmDescription    = Var_ELB_UnhealthyhostCount.AlarmDescription,
+                ComparisonOperator  = Var_ELB_UnhealthyhostCount.ComparisonOperator,
+                EvaluationPeriods   = Var_ELB_UnhealthyhostCount.EvaluationPeriods,
+                MetricName          = Var_ELB_UnhealthyhostCount.MetricName,
+                Namespace           = Var_ELB_UnhealthyhostCount.Namespace,
+                Period              = Var_ELB_UnhealthyhostCount.Period,
+                Statistic           = Var_ELB_UnhealthyhostCount.Statistic,
+                Threshold           = Var_ELB_UnhealthyhostCount.Threshold,
+                Unit                = Var_ELB_UnhealthyhostCount.Unit,
+                TreatMissingData    = Var_ELB_UnhealthyhostCount.TreatMissingData,
+                ActionsEnabled      = Var_ELB_UnhealthyhostCount.ActionsEnabled,
+                OKActions = [
+                    Var_ELB_UnhealthyhostCount.OKActions,
+                ],
+                AlarmActions = [
+                    Var_ELB_UnhealthyhostCount.AlarmActions,
+                ],
                 Dimensions=[
                 {
-                    'Name': 'ELB_Name',
+                    'Name': Var_ELB_UnhealthyhostCount.Dimensions_Name,
                     'Value': elb
                 },
                 ],
                 Tags=[
                 {
-                    'Key': 'type',
-                    'Value': 'UnHealthyHostCount'
+                    'Key': Var_ELB_UnhealthyhostCount.Tags_Key,
+                    'Value': Var_ELB_UnhealthyhostCount.Tags_Value
                 },
-                {
-                    'Key': 'Name',
-                    'Value': elb
-                }           
-                ],
-                Unit='Seconds'
+                          
+                ]
+                
                 )
             print("UnHealthyHostCount Monitor Successfully created for :", elb)
     print("==========================================")
@@ -158,33 +178,38 @@ def Create_ELB_HTTPCode_ELB_5XX(elb_list):
             
         else:
             cloudwatch.put_metric_alarm(
-                AlarmName='5XX error count is High on %s' % elb,
-                ComparisonOperator='GreaterThanOrEqualToThreshold',
-                EvaluationPeriods=1,
-                MetricName='HTTPCode_ELB_5XX',
-                Namespace='AWS/ELB',
-                Period=60,
-                Statistic='Average',
-                Threshold=60,
-                ActionsEnabled=False,
-                AlarmDescription='Alarm when HTTPCode_ELB_5XX Spike over 1',
+                AlarmName           = Var_ELB_5XX.AlarmName + '%s' % elb,
+                AlarmDescription    = Var_ELB_5XX.AlarmDescription,
+                ComparisonOperator  = Var_ELB_5XX.ComparisonOperator,
+                EvaluationPeriods   = Var_ELB_5XX.EvaluationPeriods,
+                MetricName          = Var_ELB_5XX.MetricName,
+                Namespace           = Var_ELB_5XX.Namespace,
+                Period              = Var_ELB_5XX.Period,
+                Statistic           = Var_ELB_5XX.Statistic,
+                Threshold           = Var_ELB_5XX.Threshold,
+                Unit                = Var_ELB_5XX.Unit,
+                TreatMissingData    = Var_ELB_5XX.TreatMissingData,
+                ActionsEnabled      = Var_ELB_5XX.ActionsEnabled,
+                OKActions = [
+                    Var_ELB_5XX.OKActions,
+                ],
+                AlarmActions = [
+                    Var_ELB_5XX.AlarmActions,
+                ],
                 Dimensions=[
                 {
-                    'Name': 'ELB_Name',
+                    'Name': Var_ELB_5XX.Dimensions_Name,
                     'Value': elb
                 },
                 ],
                 Tags=[
                 {
-                    'Key': 'type',
-                    'Value': 'HTTPCode_ELB_5XX'
+                    'Key': Var_ELB_5XX.Tags_Key,
+                    'Value': Var_ELB_5XX.Tags_Value
                 },
-                {
-                    'Key': 'Name',
-                    'Value': elb
-                }           
-                ],
-                Unit='Seconds'
+                          
+                ]
+                
                 )
             print("5XX error count Monitor Successfully created for :", elb)
     print("==========================================")
