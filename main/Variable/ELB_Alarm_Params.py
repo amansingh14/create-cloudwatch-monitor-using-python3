@@ -76,7 +76,6 @@ class ELB_RequestCount_Variable:
 class ELB_UnhealthyhostCount_Variable:
 
     AlarmName              = 'ELB : UnhealthyHostCount is Greater than One '
-    AlarmDescription       = 'Alarm when ELB UnhealthyHostCount Greater than ' + str(Threshold)
     ActionsEnabled         =  True                                                           
     OKActions              = 'arn:aws:sns:us-east-1:695292474035:test-automation-cloudwatch'
     AlarmActions           = 'arn:aws:sns:us-east-1:695292474035:test-automation-cloudwatch' 
@@ -87,17 +86,17 @@ class ELB_UnhealthyhostCount_Variable:
     Unit                   = 'Count'             
     EvaluationPeriods      = 1
     DatapointsToAlarm      = 1
-    Threshold              = 1
+    Threshold              = 1.0
     ComparisonOperator     = 'GreaterThanOrEqualToThreshold'                                 
     TreatMissingData       = 'missing'
     Tags_Key               = 'Name'
     Tags_Value             = 'ELB_RequestCount'
     Dimensions_Name        = 'LoadBalancerName'
+    AlarmDescription       = 'Alarm when ELB UnhealthyHostCount Greater than ' + str(Threshold)
 
-    class ELB_5XX_Variable:
+class ELB_5XX_Variable:
 
     AlarmName              = 'ELB : 5XX error count is High on '
-    AlarmDescription       = 'Alarm when ELB 5XX error count Spike over ' + str(Threshold)
     ActionsEnabled         =  True                                                           
     OKActions              = 'arn:aws:sns:us-east-1:695292474035:test-automation-cloudwatch'
     AlarmActions           = 'arn:aws:sns:us-east-1:695292474035:test-automation-cloudwatch' 
@@ -114,6 +113,7 @@ class ELB_UnhealthyhostCount_Variable:
     Tags_Key               = 'Name'
     Tags_Value             = 'ELB_RequestCount'
     Dimensions_Name        = 'LoadBalancerName'
+    AlarmDescription       = 'Alarm when ELB 5XX error count Spike over ' + str(Threshold)
     
     
         

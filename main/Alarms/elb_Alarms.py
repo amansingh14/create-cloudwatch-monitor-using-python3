@@ -8,14 +8,14 @@
 ####
 
 import boto3
-from Variable import Variable_Monitor
+from Variable import ELB_Alarm_Params
 import re
 monitor                    = boto3.resource('cloudwatch')
 cloudwatch                 = boto3.client('cloudwatch')
-Var_ELB_Latency            = Variable_Monitor.ELB_Latency_Variable
-Var_ELB_RequestCount       = Variable_Monitor.ELB_RequestCount_Variable
-Var_ELB_UnhealthyhostCount = Variable_Monitor.ELB_UnhealthyhostCount_Variable
-Var_ELB_5XX                = Variable_Monitor.ELB_5XX_Variable
+Var_ELB_Latency            = ELB_Alarm_Params.ELB_Latency_Variable
+Var_ELB_RequestCount       = ELB_Alarm_Params.ELB_RequestCount_Variable
+Var_ELB_UnhealthyhostCount = ELB_Alarm_Params.ELB_UnhealthyhostCount_Variable
+Var_ELB_5XX                = ELB_Alarm_Params.ELB_5XX_Variable
 
 
 Cloudwatch_Monitor_List = []
@@ -28,7 +28,7 @@ def Create_ELB_Latency(elb_list):
 
     Monitor_List = str(Cloudwatch_Monitor_List)
     for elb in elb_list: 
-        if list(set(re.findall(r'elb latency is high on*(?: *([\w.-]+))?', Monitor_List.lower()))):
+        if list(set(re.findall(r'elb : latency is high on*(?: *([\w.-]+))?', Monitor_List.lower()))):
             print('ELB Latency Alarm is Present for :', elb)
             
         else:
